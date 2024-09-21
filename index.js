@@ -32,7 +32,14 @@ const resolvers = {
     }
 };
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer(
+    {
+        typeDefs,
+        resolvers,
+        introspection: true,
+        playground: true
+    }
+);
 
 const app = express();
 server.start().then(() => {
