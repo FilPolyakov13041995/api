@@ -27,13 +27,10 @@ const resolvers = {
         users: () => users
     },
     Mutation: {
-        updateUser: (_, {  id, name, age, address, status }) => {
+        updateUser: (_, {  id, ...fieldsToUpdate }) => {
             const user = users.find(user => user.id === id);
             if(user) {
-                if(name !== undefined) user.name = name;
-                if(age !== undefined) user.age = age;
-                if(address !== undefined) user.address = address;
-                if(status !== undefined) user.status = status;
+                Object.assign(user, fieldsToUpdate);
                 return user;
             }
             return null;
