@@ -1,45 +1,13 @@
 const express = require("express");
-const { ApolloServer, gql } = require("apollo-server-express");
+const { ApolloServer } = require("apollo-server-express");
 const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-server-core");
+const { typeDefs } = require("./schema/typeDefs.js");
+const { resolvers } = require("./schema/resolvers.js");
 
-const typeDefs = gql`
-    type User {
-        id: Int
-        name: String
-        age: Int
-        address: String
-        status: Boolean
-    }
-
-    type Query {
-        users: [User]
-    }
-`; 
-
-const users = [
-    {
-        id: 1,
-        name: "Helen Adams",
-        age: 24,
-        address: "123 Main St",
-        status: false
-    },
-    {
-        id: 2,
-        name: "Phil Adams",
-        age: 29,
-        address: "456 Elm St",
-        status: false
-    }
-];
-
-const resolvers = {
-    Query: {
-        users: () => users
-    }
-};
-
-const server = new ApolloServer({ typeDefs, resolvers, introspection: true,
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    introspection: true,
     plugins: [
         ApolloServerPluginLandingPageGraphQLPlayground()
     ]
