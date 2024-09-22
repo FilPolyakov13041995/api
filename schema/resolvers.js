@@ -28,7 +28,7 @@ const resolvers = {
     },
     Mutation: {
         updateUser: (_, {  id, name, age, address, status }) => {
-            const user = this.users.find(user => user.id === id);
+            const user = users.find(user => user.id === id);
             if(user) {
                 if(name !== undefined) user.name = name;
                 if(age !== undefined) user.age = age;
