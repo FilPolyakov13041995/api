@@ -4,9 +4,11 @@ const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-serve
 
 const typeDefs = gql`
     type User {
+        id: Int
         name: String
         age: Int
         address: String
+        status: Boolean
     }
 
     type Query {
@@ -16,14 +18,18 @@ const typeDefs = gql`
 
 const users = [
     {
+        id: 1,
         name: "Helen Adams",
-        age: 29,
-        address: "123 Main St"
+        age: 24,
+        address: "123 Main St",
+        status: false
     },
     {
+        id: 2,
         name: "Phil Adams",
-        age: 24,
-        address: "456 Elm St"
+        age: 29,
+        address: "456 Elm St",
+        status: false
     }
 ];
 
