@@ -22,20 +22,15 @@ let users = [
     }
 ];
 
-let nextId = 4;
-
 const resolvers = {
     Query: {
         users: () => users
     },
     Mutation: {
-        createUser: (_, { name, age, address, status }) => {
-          const newUser = {
-              id: nextId++,
-              name,
-              age,
-              address,
-              status
+        createUser: (_, { input }) => {
+            const newUser = {
+                id: users.length + 1,
+                ...input
             }
             users.push(newUser);
             return newUser;
