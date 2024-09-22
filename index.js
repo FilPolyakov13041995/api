@@ -1,5 +1,6 @@
 const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
+const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-server-core");
 
 const typeDefs = gql`
     type User {
@@ -32,7 +33,11 @@ const resolvers = {
     }
 };
 
-const server = new ApolloServer({ typeDefs, resolvers, introspection: true, playground: true });
+const server = new ApolloServer({ typeDefs, resolvers, introspection: true, introspection: true,
+    plugins: [
+        ApolloServerPluginLandingPageGraphQLPlayground()
+    ]
+});
 
 const app = express();
 server.start().then(() => {
@@ -40,4 +45,7 @@ server.start().then(() => {
     app.listen({ port: process.env.PORT || 4000 }, () => {
         console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
     });
+});
+app.get("/", (req, res) => {
+    res.send("Welcome to the GraphQL API");
 });
