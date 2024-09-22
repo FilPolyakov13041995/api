@@ -39,7 +39,7 @@ const resolvers = {
     }
 };
 
-const server = new ApolloServer({ typeDefs, resolvers, introspection: true, introspection: true,
+const server = new ApolloServer({ typeDefs, resolvers, introspection: true,
     plugins: [
         ApolloServerPluginLandingPageGraphQLPlayground()
     ]
