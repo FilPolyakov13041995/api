@@ -29,22 +29,22 @@ const resolvers = {
     Mutation: {
         createUser: (_, { input }) => {
             const newUser = {
-                id: users.length + 1,
+                id: String(users.length + 1),
                 ...input
             }
             users.push(newUser);
             return newUser;
         },
-        updateUser: (_, {  id, ...fieldsToUpdate }) => {
-            const user = users.find(user => user.id === id);
+        updateUser: (_, {  id, input }) => {
+            const user = users.find(user => String(user.id) === String(id));
             if(user) {
-                Object.assign(user, fieldsToUpdate);
+                Object.assign(user, input);
                 return user;
             }
             return null;
         },
         deleteUser: (_, { id }) => {
-            const userIndex = users.findIndex(user => user.id === id);
+            const userIndex = users.findIndex(user => String(user.id) === String(id));
             if(userIndex !== -1) {
                 const deleteUser = users[userIndex];
                 users.splice(userIndex, 1);
