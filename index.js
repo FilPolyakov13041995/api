@@ -1,8 +1,8 @@
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-server-core");
-const { typeDefs } = require("./schema/typeDefs.js");
-const { resolvers } = require("./schema/resolvers.js");
+
+const { typeDefs, resolvers } = require("./schema");
 
 const server = new ApolloServer({
     typeDefs,
