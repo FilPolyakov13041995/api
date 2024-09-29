@@ -24,7 +24,15 @@ let users = [
 
 const resolvers = {
     Query: {
-        users: () => users
+        users: (_, { input }) => {
+            if(input && input.name) {
+                return users.filter(user => user.name.toLowerCase().includes(input.name.toLowerCase()));
+            }
+            if(input && input.address) {
+                return users.filter(user => user.address.toLowerCase().includes(input.address.toLowerCase()));
+            }
+            return users;
+        }
     },
     Mutation: {
         createUser: (_, { input }) => {
